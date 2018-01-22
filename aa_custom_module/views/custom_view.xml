@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Define custom Action -->
+    <record id="custom_action" model="ir.actions.act_window">
+            <field name="name">WinMate App</field>
+            <field name="res_model">custom.model</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Click here to create new item !
+                </p>
+            </field>
+    </record>
+  
+   <!-- Tree View -->
+   <record id="tree_custom_model" model="ir.ui.view">
+            <field name="name">custom.model.tree</field>
+            <field name="model">custom.model</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="age"/>
+                    
+                </tree>
+            </field>
+    </record>
+    <!-- Form View -->
+   <record id="form_custom_model" model="ir.ui.view">
+            <field name="name">custom.model.form</field>
+            <field name="model">custom.model</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="name" required="1"/>
+                            <field name="age" required="1"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+    </record>
+
+   <record id="view_sale_order_custom" model="ir.ui.view">
+            <field name="name">sale.order.custom.form.inherited</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='partner_id']" position="after">
+                    <field name="custom_field"/>
+                </xpath>
+            </field>
+    </record>
+            
+    <menuitem action="custom_action" id="menu_custom_action" sequence="1"/>
+
+   
+    <!-- Create Top Menu -->
+    <menuitem name="Top Menu" id="custom_top_menu"/>
+    <!-- Create Sub Child Menu -->
+    <menuitem name="Sub Child Menu"  id="custom_sub_menu" parent="custom_top_menu"/>
+</odoo>
